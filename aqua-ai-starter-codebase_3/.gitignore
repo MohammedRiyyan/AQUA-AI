@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+
+# Node
+node_modules/
+.next/
+out/
+
+# Env
+.env
+.env.local
+
+# AI artifacts
+backend/app/ai/retrieval/store/*
+!backend/app/ai/retrieval/store/.gitkeep
+backend/app/ai/ingestion/uploads/*
+!backend/app/ai/ingestion/uploads/.gitkeep
+models/
+
+# OS
+.DS_Store
