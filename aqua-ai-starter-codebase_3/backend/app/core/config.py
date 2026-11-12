@@ -3,6 +3,7 @@ Central application configuration.
 All values are overridable via environment variables / .env — see .env.example.
 """
 from functools import lru_cache
+
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 

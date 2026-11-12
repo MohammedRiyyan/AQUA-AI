@@ -17,7 +17,6 @@ pipeline, deployment) that you can build out feature-by-feature. See
 
 ```
 aqua-ai/
-├── prototype/              Standalone HTML/CSS/JS UI prototype (open directly, no build step)
 ├── frontend/                Next.js 14 + TypeScript + Tailwind app
 ├── backend/                 FastAPI + SQLAlchemy + custom RAG pipeline
 ├── database/                 Raw SQL schema + seed data (mirrors the SQLAlchemy models)
@@ -25,15 +24,17 @@ aqua-ai/
 └── .github/workflows/ci.yml  Lint, test, build on every push
 ```
 
-### Try the UI right now
+### Try the UI quickly
 
-Open `prototype/aqua_ai_prototype.html` directly in a browser — no install,
-no backend required. It's a fully interactive mock of the real app: the
-animated water gauge, quick-add glasses/bottles, custom container builder
-(manual + smart glass measurement), a mocked hydration-coach chat with the
-same explainability UI (confidence + sources) the real AI answers will use,
-weekly chart, and achievements. Use it to validate the design direction
-before wiring up the real Next.js app.
+The Next.js UI can run on its own (no backend, database or Docker needed) to preview the screens:
+
+```bash
+cd frontend
+npm install
+npm run dev        # http://localhost:3000
+```
+
+Features that call the API (login, logging water, AI coach) need the backend — see below.
 
 ### Run the full stack
 

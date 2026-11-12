@@ -432,8 +432,6 @@ aqua-ai/
 ├── docker-compose.yml           postgres + redis + qdrant + backend + frontend
 ├── .github/workflows/ci.yml     Lint → test → docker build, on every push
 │
-├── prototype/
-│   └── aqua_ai_prototype.html   Standalone, dependency-free UI mock — open directly in a browser
 │
 ├── database/
 │   ├── schema.sql                Full DDL, mirrors backend/app/models/

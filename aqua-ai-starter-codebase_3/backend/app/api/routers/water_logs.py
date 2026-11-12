@@ -1,4 +1,4 @@
-from datetime import date, datetime, timedelta, timezone
+from datetime import UTC, date, datetime, timedelta
 
 from fastapi import APIRouter, Depends
 from sqlalchemy import func, select
@@ -29,7 +29,7 @@ async def log_water(
 
 @router.get("/today", response_model=list[WaterLogOut])
 async def today_logs(user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
-    start_of_day = datetime.now(timezone.utc).replace(hour=0, minute=0, second=0, microsecond=0)
+    start_of_day = datetime.now(UTC).replace(hour=0, minute=0, second=0, microsecond=0)
     result = await db.scalars(
         select(WaterLog)
         .where(WaterLog.user_id == user.id, WaterLog.logged_at >= start_of_day)
@@ -41,7 +41,7 @@ async def today_logs(user: User = Depends(get_current_user), db: AsyncSession = 
 @router.get("/summary", response_model=DailySummary)
 async def daily_summary(user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
     today = date.today()
-    start_of_day = datetime.now(timezone.utc).replace(hour=0, minute=0, second=0, microsecond=0)
+    start_of_day = datetime.now(UTC).replace(hour=0, minute=0, second=0, microsecond=0)
 
     consumed = await db.scalar(
         select(func.coalesce(func.sum(WaterLog.amount_ml), 0)).where(
@@ -73,7 +73,7 @@ async def weekly_summary(user: User = Depends(get_current_user), db: AsyncSessio
     summaries = []
     for i in range(6, -1, -1):
         day = today - timedelta(days=i)
-        day_start = datetime(day.year, day.month, day.day, tzinfo=timezone.utc)
+        day_start = datetime(day.year, day.month, day.day, tzinfo=UTC)
         day_end = day_start + timedelta(days=1)
         consumed = await db.scalar(
             select(func.coalesce(func.sum(WaterLog.amount_ml), 0)).where(

@@ -4,7 +4,7 @@ Postgres (WeatherSnapshot) so we don't call the provider on every request.
 Uses Open-Meteo by default (no API key required); swap WEATHER_PROVIDER_BASE_URL
 for any provider that returns temperature/humidity by lat-lon.
 """
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 
 import httpx
 from sqlalchemy import select
@@ -23,7 +23,7 @@ async def get_current_weather(db: AsyncSession, city: str, lat: float, lon: floa
         .where(WeatherSnapshot.city == city)
         .order_by(WeatherSnapshot.fetched_at.desc())
     )
-    if cached and (datetime.now(timezone.utc) - cached.fetched_at) < CACHE_TTL:
+    if cached and (datetime.now(UTC) - cached.fetched_at) < CACHE_TTL:
         return cached
 
     async with httpx.AsyncClient(timeout=10) as client:

@@ -18,7 +18,7 @@ backend/app/ai/retrieval/store/*
 !backend/app/ai/retrieval/store/.gitkeep
 backend/app/ai/ingestion/uploads/*
 !backend/app/ai/ingestion/uploads/.gitkeep
-models/
+/ml_models/
 
 # OS
 .DS_Store

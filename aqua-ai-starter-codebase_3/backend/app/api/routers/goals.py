@@ -6,7 +6,6 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.api.deps import get_current_user
 from app.db.session import get_db
 from app.models.goal import Goal
-from app.models.health_profile import DailyHealthData
 from app.models.user import User
 from app.services.hydration_calculator import calculate_daily_goal
 from app.services.weather_service import get_current_weather
